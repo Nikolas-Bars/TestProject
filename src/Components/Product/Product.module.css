@@ -1,0 +1,9 @@
+.mainContainer{
+    display: flex;
+    justify-content: space-around;
+    border: 1px solid red;
+    margin: 10px;
+}
+.text {
+    width: 100px;
+}

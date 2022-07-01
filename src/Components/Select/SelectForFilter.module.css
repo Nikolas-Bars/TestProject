@@ -1,0 +1,21 @@
+.item {
+    margin: 5px;
+    border-bottom: 2px solid yellow;
+    cursor: pointer;
+}
+.item:hover{
+    border: 2px solid yellow;;
+}
+.title{
+    background-color: blue;
+    color: white;
+    padding: 10px;
+    border: 1px solid yellow;
+    border-radius: 5px;
+    width: 70px;
+    cursor: pointer;
+  }
+
+.title:hover{
+    border: 2px solid yellow;;
+}
