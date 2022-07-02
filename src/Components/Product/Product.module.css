@@ -5,7 +5,12 @@
     border-radius: 5px;
     padding: 10px;
     margin: 10px;
+    cursor: pointer;
 }
 .text {
     width: 100px;
+}
+.mainContainer:hover{
+    background-color: gray;
+    color: white;
 }
