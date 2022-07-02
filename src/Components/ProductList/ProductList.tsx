@@ -34,12 +34,13 @@ const ProductList = () => {
 
     return (
         <div className={s.mainContainer}>
-
+            <div style={{marginLeft: '9px'}}><SelectForFilter /> </div>
             <div className={s.headerProductList}>
-                <div className={s.text}>Дата</div><div className={s.text}>Название</div><div className={s.text}>Количество</div><div className={s.text}>Расстояние</div>
+                <div className={s.textData}>Дата</div><div className={s.text}>Название</div><div className={s.text}>Количество</div><div className={s.textDistance }>Расстояние</div>
             </div>
-            <div>Параметры фильтра: <SelectForFilter /></div>
+
             <div className={s.productContainer}>
+                {!products.length && <div>Ничего не найдено</div>}
             {products.map(el => {
                 return <Product product={el}/>
             })}

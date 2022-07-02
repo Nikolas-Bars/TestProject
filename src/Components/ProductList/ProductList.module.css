@@ -15,10 +15,23 @@
     margin: 10px;
     padding: 10px;
     border: 1px solid gray;
+    background-color: gray;
+    color: white;
+    font-weight: 500;
+    border-radius: 5px;
 
 }
 
 .text {
     width: 100px;
 }
+.textData {
+    margin-left: 50px;
+    width: 100px;
+}
+.textDistance {
+    margin-right: 70px;
+    width: 100px;
+}
+
 

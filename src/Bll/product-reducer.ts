@@ -80,19 +80,28 @@ export const productReducer = (state: StateType = initialState, action: ActionTy
                 products: initialState.products.slice(action.currentPage * state.pageSize - state.pageSize, action.currentPage * state.pageSize)
             }
         case "SET_PAGE_SIZE":
-            return {...state, pageSize: action.pageSize,
-                products: initialState.products.slice(initialState.currentPage * action.pageSize - action.pageSize, initialState.currentPage * action.pageSize)}
+            return {
+                ...state, pageSize: action.pageSize,
+                products: initialState.products.slice(initialState.currentPage * action.pageSize - action.pageSize, initialState.currentPage * action.pageSize)
+            }
         case "SET_FILTER_COUNT":
-            const sortEggsInNest =(a: ProductType, b: ProductType) => {
+            const sortEggsInNest = (a: ProductType, b: ProductType) => {
                 return Number(a[action.filter]) > Number(b[action.filter]) ? 1 : Number(b[action.filter]) > Number(a[action.filter]) ? -1 : 0;
             }
-            return {...initialState, products: state.products.sort(sortEggsInNest)}
+            return {...state, currentPage: 1, products: state.products.sort(sortEggsInNest)}
         case "SET_FILTER_TITLE":
-            const sortEggsInNest2 =(a: ProductType, b: ProductType) => {
+            const sortEggsInNest2 = (a: ProductType, b: ProductType) => {
                 return a[action.filter] > b[action.filter] ? 1 : b[action.filter] > a[action.filter] ? -1 : 0;
-
             }
-            return {...initialState, products: state.products.sort(sortEggsInNest2)}
+            return {...state, currentPage: 1, products: state.products.sort(sortEggsInNest2)}
+        case "SEARCH_TITLE":
+            return {...state, currentPage: 1, products: initialState.products.filter(el => el.title.toLowerCase().includes(action.title.toLowerCase()))}
+        case "SEARCH_MIN_MAX_COUNT":
+            return {...state, currentPage: 1, products: initialState.products.filter(el=> Number(el.count) >= Number(action.min) && Number(el.count) <= Number(action.max))}
+        case "SEARCH_MIN_MAX_DISTANCE":
+            return{...state, currentPage: 1, products: initialState.products.filter(el=> Number(el.distance) >= Number(action.min) && Number(el.distance) <= Number(action.max))}
+        case "REMOVE_FILTER":
+            return {...state, products: initialState.products, currentPage: 1}
         default:
             return {...state}
     }
@@ -102,5 +111,16 @@ export const setCurrentPageAC = (currentPage: number) => ({type: 'SET_CURRENT_PA
 export const setPageSizeAC = (pageSize: number) => ({type: 'SET_PAGE_SIZE', pageSize} as const)
 export const setFilterCountAC = (filter: FilterType) => ({type: 'SET_FILTER_COUNT', filter} as const)
 export const setFilterTitleAC = (filter: FilterType) => ({type: 'SET_FILTER_TITLE', filter} as const)
+export const searchTitleAC = (title: string) => ({type: 'SEARCH_TITLE', title} as const)
+export const searchCountMinMaxAC = (min: string, max: string) => ({type: 'SEARCH_MIN_MAX_COUNT', min, max} as const)
+export const searchDistanceMinMaxAC = (min: string, max: string) => ({type: 'SEARCH_MIN_MAX_DISTANCE', min, max} as const)
+export const removeFilterAC = () => ({type: 'REMOVE_FILTER'} as const)
 
-export type ActionType = ReturnType<typeof setCurrentPageAC> | ReturnType<typeof setPageSizeAC> | ReturnType<typeof setFilterCountAC> | ReturnType<typeof setFilterTitleAC>
+export type ActionType = ReturnType<typeof setCurrentPageAC>
+    | ReturnType<typeof setPageSizeAC>
+    | ReturnType<typeof setFilterCountAC>
+    | ReturnType<typeof setFilterTitleAC>
+    | ReturnType<typeof searchTitleAC>
+    | ReturnType<typeof searchCountMinMaxAC>
+    | ReturnType<typeof searchDistanceMinMaxAC>
+    | ReturnType<typeof removeFilterAC>

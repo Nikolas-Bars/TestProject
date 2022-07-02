@@ -1,7 +1,9 @@
 .mainContainer{
     display: flex;
     justify-content: space-around;
-    border: 1px solid red;
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 10px;
     margin: 10px;
 }
 .text {
